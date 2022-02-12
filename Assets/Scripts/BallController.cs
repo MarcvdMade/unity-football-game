@@ -47,6 +47,7 @@ public class BallController : MonoBehaviour
     // On collision trigger
     private void OnCollisionEnter(Collision collision)
     {
+
         if (collision.gameObject.CompareTag("Blue Goal") || collision.gameObject.CompareTag("Red Goal"))
         {
             // Check if ball is in red goal
