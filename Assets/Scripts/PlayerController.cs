@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     // store player rigid body
     private Rigidbody playerRb;
+    private float minHeight = -10f;
 
     // Get focal point
     private GameObject focalPoint;
@@ -29,11 +30,19 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float forwardInput = Input.GetAxis("Vertical");
-        playerRb.AddForce(focalPoint.transform.forward * forwardInput * speed);
+        if (!PauseMenu.GameIsPaused)
+        {
+            float forwardInput = Input.GetAxis("Vertical");
+            playerRb.AddForce(focalPoint.transform.forward * forwardInput * speed);
+        }
 
         // Make power up indicator follow player
         powerupIndicator.transform.position = transform.position + new Vector3(0, 0, 0);
+
+        if (playerRb.position.y < minHeight)
+        {
+            playerRb.position = new Vector3(0, 1, -13);
+        }
     }
 
     // On trigger enter method

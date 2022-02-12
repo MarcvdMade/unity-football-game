@@ -8,6 +8,7 @@ public class BallController : MonoBehaviour
 
     // Ball body
     private Rigidbody ballRb;
+    private float minHeight = -10f;
 
     // Player
     private GameObject player;
@@ -37,7 +38,10 @@ public class BallController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (ballRb.position.y < minHeight)
+        {
+            ballRb.position = new Vector3(0, 1, 0);
+        }
     }
 
     // On collision trigger

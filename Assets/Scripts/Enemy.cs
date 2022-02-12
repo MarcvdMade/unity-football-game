@@ -5,6 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float speed = 3.0f;
+    public float minHeight = -10f;
 
     private Rigidbody enemyRb;
     private GameObject ball;
@@ -21,7 +22,15 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 lookDirection = (ball.transform.position - transform.position).normalized;
-        enemyRb.AddForce( lookDirection * speed);
+        if (!PauseMenu.GameIsPaused)
+        {
+            Vector3 lookDirection = (ball.transform.position - transform.position).normalized;
+            enemyRb.AddForce( lookDirection * speed);
+        }
+
+        if (enemyRb.position.y < minHeight)
+        {
+            enemyRb.position = new Vector3(0, 1, 11);
+        }
     }
 }
